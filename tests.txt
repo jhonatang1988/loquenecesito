@@ -1,0 +1,202 @@
+query allCharacters {
+  allCharacters {
+        edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}
+
+query characterByName {
+  allCharacters(name_Icontains: "sky") {
+    edges {
+      node {
+        name
+      }
+    }
+  }
+}
+
+query CharacterById {
+  character(id: "Q2hhcmFjdGVyTm9kZTo3") {
+    name
+    movies {
+      edges {
+        node {
+          id
+          name
+          openingCrawl
+          directors: persons(jobRole: "DIR") {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+          producers: persons(jobRole: "PDR") {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+          planets {
+            edges {
+              node {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query allUsers {
+  users {
+    edges {
+      node {
+        username
+        verified
+      }
+    }
+  }
+}
+
+query whoAmI {
+  me {
+    username
+    email
+  }
+}
+
+mutation registerJuan1 {
+  register (
+    input: {
+      email: "juan1@gmail.com"
+        username: "juan1"
+        password1: "Java_1988"
+      password2: "Java_1988"
+    }
+  ) {
+    success
+    errors
+    token
+    refreshToken
+  }
+}
+
+query getJuan1 {
+  users (last: 1) {
+    edges {
+      node {
+        id
+        username
+        email
+        verified
+        lastName
+      }
+    }
+  }
+}
+
+mutation verifyJuan1 {
+  verifyAccount (
+    input: {
+      token: "eyJ1c2VybmFtZSI6Imp1YW4xIiwiYWN0aW9uIjoiYWN0aXZhdGlvbiJ9:1kNqe1:px68s7QToBMjSjmabmKa1vfeyCl4abSFbiBYjyjOm8g"
+    }
+  ) {
+    success
+    errors
+    clientMutationId
+  }
+}
+
+mutation loginJuan1 {
+  tokenAuth (
+    input: {
+      password: "Java_1988"
+      username: "juan1"
+    }
+  ) {
+    token
+  }
+}
+
+mutation updateJuan1 {
+  updateAccount (
+    input: {
+      lastName: "Perezoso"
+    }
+  ) {
+    success
+    errors
+    clientMutationId
+  }
+}
+mutation createCharacter {
+  createCharacter (
+    input: {
+      name: "Wicket Systri Warrick"
+      moviesIds: [
+        {
+          id: "TW92aWVOb2RlOjM="
+        }
+      ]
+    }
+  ) {
+    character {
+      name
+      movies {
+        edges {
+          node {
+            name
+            openingCrawl
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation createPlanet {
+  createPlanet (
+    input: {
+      name: "Naboo"
+      moviesIds: [
+        {
+          id: "TW92aWVOb2RlOjM="
+        }
+      ]
+    }
+  ) {
+    planet {
+      name
+      movies {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation createMovie {
+  createMovie (
+    input: {
+      name: "The Phantom Menace"
+      openingCrawl: "Turmoil has engulfed the\r\nGalactic Republic. The taxation\r\nof trade routes to outlying star\r\nsystems is in dispute.\r\n\r\nHoping to resolve the matter\r\nwith a blockade of deadly\r\nbattleships, the greedy Trade\r\nFederation has stopped all\r\nshipping to the small planet\r\nof Naboo.\r\n\r\nWhile the Congress of the\r\nRepublic endlessly debates\r\nthis alarming chain of events,\r\nthe Supreme Chancellor has\r\nsecretly dispatched two Jedi\r\nKnights, the guardians of\r\npeace and justice in the\r\ngalaxy, to settle the conflict...."
+    }
+  ) {
+    movie {
+      name
+      openingCrawl
+    }
+  }
+}
